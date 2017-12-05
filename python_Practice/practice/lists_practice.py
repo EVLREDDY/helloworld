@@ -4,7 +4,6 @@ Created on 05-Dec-2017
 @author: Linga
 '''
 from IPython.utils.py3compat import xrange
-from ipykernel import comm
 a = [1,1,2,3,5,9,13,34,21,12,89]
 l = []
 
