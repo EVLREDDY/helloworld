@@ -4,6 +4,7 @@ Created on 05-Dec-2017
 @author: Linga
 '''
 from IPython.utils.py3compat import xrange
+from ipykernel import comm
 a = [1,1,2,3,5,9,13,34,21,12,89]
 l = []
 
@@ -25,3 +26,22 @@ for i in x:
         divisors.append(i)
 
 print(divisors)
+
+''' 
+List overlap 
+this will get the common inputs without duplicates 
+in the two lists which are entered by the user
+'''
+first_list = input("Enter 1st list of values separated by ',' ")
+second_list = input("Enter 2nd list of values separated by ',' ")
+common_values = []
+a = [i for i in first_list.split(sep=',')]
+b = [j for j in second_list.split(sep=',')]
+for x in a:
+    for y in b:
+        if x == y and  not x in common_values:
+            common_values.append(x)
+
+print(common_values)
+
+
