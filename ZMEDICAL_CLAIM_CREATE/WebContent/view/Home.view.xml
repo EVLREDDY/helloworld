@@ -1,0 +1,220 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:viz="sap.viz.ui5.controls"
+	controllerName="ZMEDICAL_CLAIM_CREATE.controller.Home" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:t="sap.ui.table" xmlns:f="sap.ui.layout.form">
+	<SplitContainer id="SS_split" initialMaster="master"
+		detailNavigate="toDetailNavigation">
+		<masterPages id="masterpage">
+			<Page id="masterPageId" title="Claim Types" class="custPage">
+				<subHeader>
+					<Toolbar id="searchBar">
+						<Select id="yearFieldId" forceSelection="false" width="100%"
+							items="{ path: '/'}">
+							<core:Item key="{year}" text="{year}" />
+						</Select>
+					</Toolbar>
+				</subHeader>
+				<content>
+					<List items="{path:'/',factory:'.listFactoryFn'}" id="masterList"
+						class="sapUiSizeCompact">
+					</List>
+				</content>
+				<footer>
+					<Toolbar></Toolbar>
+				</footer>
+			</Page>
+			<Page id="secondMaster" title="" showNavButton="true"
+				navButtonPress="backToMaster">
+				<subHeader>
+					<Toolbar>
+						<Select forceSelection="false" width="100%" items="{ path: '/'}">
+							<core:Item key="{year}" text="{year}" />
+						</Select>
+					</Toolbar>
+				</subHeader>
+				<content>
+					<List items="{/}" id="master2List" class="sapUiSizeCompact">
+						<items>
+							<ObjectListItem title="{claimNo}" type="Active"
+								press="onSelectClaimType" number="{claimAmount}" numberUnit="INR">
+								<firstStatus>
+									<ObjectStatus text="{claimType}"
+										state="{ path: 'claimType',formatter: '.claimType'}" />
+								</firstStatus>
+								<attributes>
+									<ObjectAttribute text="{empName}" />
+									<ObjectAttribute text="{empNo}" />
+								</attributes>
+							</ObjectListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Toolbar>
+						<!-- <Button text="Reset" press="onResetFilters" id="resetBtnId" tooltip="Clear 
+							Filters" type="Reject" /> -->
+						<Button text="" press="onSearchBtnPress" tooltip="Search claim by month,year,type"
+							type="Emphasized" icon="sap-icon://add-filter" />
+						<ToolbarSpacer />
+						<Button text="Create" press="onCreateNewClaim" tooltip="Create new claim"
+							type="Emphasized" icon="sap-icon://create" />
+					</Toolbar>
+				</footer>
+			</Page>
+		</masterPages>
+		<detailPages>
+			<MessagePage id="messagePageId" class="custPage" text=""
+				description="Select the claim to see the details.">
+			</MessagePage>
+		</detailPages>
+		<detailPages>
+			<Page id="vizPage" title="Analytics" showNavButton="true"
+				navButtonPress="backToMaster">
+				<content>
+					<viz:VizFrame id="idVizFrame" title="Claims to be approved" uiConfig="{applicationSet:'fiori'}"
+						height='100%' width="100%" vizType='pie' selectData="onDataSelect">
+						<viz:dataset>
+							<viz.data:FlattenedDataset data="{/}">
+								<viz.data:dimensions>
+									<viz.data:DimensionDefinition
+										name="Store Name" value="{Store Name}" />
+								</viz.data:dimensions>
+								<viz.data:measures>
+									<viz.data:MeasureDefinition name="Revenue"
+										value="{Revenue}" />
+								</viz.data:measures>
+							</viz.data:FlattenedDataset>
+						</viz:dataset>
+
+						<viz:feeds>
+							<viz.feeds:FeedItem uid="size" type="Measure"
+								values="Revenue" />
+							<viz.feeds:FeedItem uid="color" type="Dimension"
+								values="Store Name" />
+						</viz:feeds>
+					</viz:VizFrame>
+				</content>
+			</Page>
+		</detailPages>
+		<detailPages>
+			<Page title=" Claim Details" showNavButton="true" id="S2Page"
+				navButtonPress="onNavBack" class="custPage">
+				<content>
+					<Panel id="claimDetailsPanelId" expandable="true" expanded="false"
+						width="auto" headerText="Claim Details" class="sapUiResponsiveMargin">
+						<content>
+							<f:SimpleForm minWidth="1024" maxContainerCols="2"
+								id="sfId" editable="true" layout="ResponsiveGridLayout"
+								labelSpanL="4" labelSpanM="4" emptySpanL="1" emptySpanM="1"
+								columnsL="2" class="linga" columnsM="2">
+								<core:Title text="Denatal" titleStyle="H3" />
+								<Label text="Claim No." id="claimNoId" textDirection="LTR" />
+								<Text text="{sfData>Claim_no}" />
+								<Label text="Employee No." textDirection="LTR" />
+								<Text text="{sfData>Employee_no}" />
+								<Label text="Financial Year" textDirection="LTR" />
+								<Text text="{sfData>Fiscal_year}" />
+								<core:Title text="" />
+								<Label text="Eligibility (INR)" textDirection="LTR" />
+								<Text text="{sfData>Eligibility}" />
+								<Label text="Claimed (INR)" textDirection="LTR" />
+								<Text text="{sfData>Claimed}" />
+								<Label text="In Process (INR)" textDirection="LTR" />
+								<Text text="{sfData>Approval_pending}" />
+								<Label text="Balance (INR)" textDirection="LTR" />
+								<Text text="{sfData>Balance}" />
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel id="panel2" expandable="{device>/expandable}"
+						expanded="true" width="auto" headerText="Bill Details" class="sapUiResponsiveMargin">
+						<content>
+							<Table growing="true" growingThreshold="20" class="mobilClassS2"
+								growingScrollToLoad="true" id="claimDetailsTable" items="{BillData>/}">
+								<columns>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<ObjectIdentifier title="Bill No." />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<ObjectIdentifier title="Bill Date" />
+									</Column>
+									<Column minScreenWidth="Phone" demandPopin="true">
+										<ObjectIdentifier title="Doctor/Hospital Name"
+											class="textBold" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<ObjectIdentifier title="Bill Amount (INR)" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<ObjectIdentifier title="Approved Amount (INR)" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<ObjectIdentifier title="Remarks" />
+									</Column>
+									<Column minScreenWidth="Phone" hAlign="Center" width="5em"
+										demandPopin="true">
+										<Text text="" />
+									</Column>
+								</columns> <!-- '{BillData>Billing_date}' -->
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{BillData>Bill_no}" />
+											<Text id="T2"
+												text="{path:'BillData>Billing_date', type:'sap.ui.model.type.Date', formatOptions: {  pattern: 'dd-MMM-yyyy'}}" />
+											<Text text="{BillData>Name}" class="textColor" />
+											<Text text="{BillData>Amount}" />
+											<Input value="{BillData>Approved_amt}" type="Number"
+												width="60%" change="onAmountChange" />
+											<TextArea value="{BillData>Remarks}"
+												showValueStateMessage="true" valueStateText='Please fill the Remarks'
+												type="text" change="onRemarks" valueState="{BillData>remarkError}" />
+											<Button icon="sap-icon://display" tooltip="Patient details"
+												press="showClaimDetails" />
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<Table growing="true" growingThreshold="20" showNoData="false"
+								growingScrollToLoad="true" id="amountTable">
+								<columns visible="false">
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="" />
+									</Column>
+									<Column minScreenWidth="Phone" demandPopin="true">
+										<Text text="" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<ObjectNumber id="billAmount" number="" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<ObjectNumber id="totalAmount" number="" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="" />
+									</Column>
+									<Column minScreenWidth="Phone" width="5em" demandPopin="true">
+										<Text text="" />
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</Panel>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer />
+						<Button type="Accept" id="ApproveBtn" text="Approve"
+							press="onApprove_Reject" icon="sap-icon://accept"></Button>
+						<Button type="Reject" id="RejectBtn" text="Reject"
+							press="onApprove_Reject" icon="sap-icon://decline"></Button>
+					</Toolbar>
+				</footer>
+			</Page>
+		</detailPages>
+	</SplitContainer>
+</core:View>

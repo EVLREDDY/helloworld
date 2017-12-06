@@ -1,0 +1,63 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover id="panelId" title="Filter Options" contentWidth="280px"
+		placement="Top" beforeClose="onBeforePopoverClose" contentHeight="300px">
+		<Panel expandable="true" expanded="false" width="auto"
+			expand="onTypePanelPress" headerText="By Type" class="sapUiResponsiveMargin">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="By Type" />
+					<ToolbarSpacer />
+					<Text text="" id="typeHeaderid" />
+				</Toolbar>
+			</headerToolbar>
+			<content>
+				<List id="typeList" items="{/}" mode="SingleSelectLeft" select="onTypeSelect">
+					<StandardListItem title="{type}" type="Active" />
+				</List>
+			</content>
+		</Panel>
+		<Panel expandable="true" expanded="false" width="auto"
+			expand="onYearPanelPress" headerText="By Year" class="sapUiResponsiveMargin">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="By Year" />
+					<ToolbarSpacer />
+					<Text text="" id="yearHeaderid" />
+				</Toolbar>
+			</headerToolbar>
+			<content>
+				<List id="yearsList" items="{/}" mode="SingleSelectLeft"
+					select="onYearSelect">
+					<StandardListItem title="{year}" type="Active" />
+				</List>
+			</content>
+		</Panel>
+
+		<Panel expandable="true" expanded="false" width="auto"
+			expand="onMonthPanelPress" headerText="By Month" class="sapUiResponsiveMargin">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="By Month" />
+					<ToolbarSpacer />
+					<Text text="" id="monthHeaderid" />
+				</Toolbar>
+			</headerToolbar>
+			<content>
+				<List id="monthList" items="{/}" mode="SingleSelectLeft"
+					select="onMonthSelect">
+					<StandardListItem title="{month}" type="Active" />
+				</List>
+			</content>
+		</Panel>
+
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button text="Clear" id="cFilterId" press="onClearFilters"
+					tooltip="Clear Filters" type="Reject" />
+				<Button id="searchBtn" type="Emphasized" text="Filter" press="onFilter" />
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

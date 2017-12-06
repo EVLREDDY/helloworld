@@ -1,0 +1,24 @@
+.custPage .sapMTitle  {
+	color:white !important
+}
+.custPage .sapMPageHeader {
+	background-color:#e31837 !important
+}
+.mobilClass tr:nth-child(2n) .sapMListTblSubCnt .sapMListTblSubCntRow{
+            /* background-color: #FFEBCD; */
+            display:flex;
+        }
+ .mobilClass tr:nth-child(2n) .sapMListTblSubCnt .sapMListTblSubCntRow .sapMListTblSubCntSpr{
+            margin-top: 3px;
+        }
+ .mobilClass tr:nth-child(2n) .sapMListTblSubCnt .sapMListTblSubCntRow .sapMListTblSubCntHdr{
+            margin-top: 3px;
+        }  
+ .sfCustClass .sapUiForm .sapUiFormResGrid .sapUiFormResGridMain div:nth-child(n) .sapUiFormContainerTitle h5{
+  	height:0rem;
+  }
+.noteText {
+	text-align: Left;
+    padding-left: 22px;
+    
+}

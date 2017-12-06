@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Popover placement="Auto" title="Member Details" contentWidth="320px"
+		contentHeight="170px">
+		<f:SimpleForm minWidth="1024" maxContainerCols="2" id="personalDetId"
+			editable="true" layout="ResponsiveGridLayout" labelSpanL="4"
+			labelSpanM="4" emptySpanL="1" emptySpanM="1" columnsL="2" columnsM="2">
+			<Label text="Family Member" id="memberName" textDirection="LTR" />
+			<Text text="{Value}" />
+			<Label text="Treatment Type" id="treatmentType" textDirection="LTR" />
+			<Text text="{text}" />
+		</f:SimpleForm>
+	</Popover>
+</core:FragmentDefinition>
