@@ -1,0 +1,9 @@
+.headFix >table>thead>tr{
+	padding: 21px 0;
+	margin: 0 auto;
+	z-index: 10;
+	width: 100%;
+	left: 0;
+	right: 0;
+	background-color:red
+}

@@ -1,8 +1,22 @@
-<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-		controllerName="helloworld.S1" xmlns:html="http://www.w3.org/1999/xhtml">
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="helloworld.S1" xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="Title">
 		<content>
-	
+			<Table growing="true" growingThreshold="100" class="headFix"
+				growingScrollToLoad="true" id="tableId" inset="true" items="{/}">
+				<columns>
+					<Column minScreenWidth="Phone" hAlign="Center" demandPopin="true">
+						<ObjectIdentifier title="Name" />
+					</Column>
+				</columns> 
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{name}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</content>
 	</Page>
 </core:View>
