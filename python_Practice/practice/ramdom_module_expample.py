@@ -7,7 +7,6 @@ import random
 random_number = random.randint(1, 9)
 user_input = ""
 choices = []
-
 def ask_user():
     choices.append(1)
     user_input = int(input('Guess the number between 1 to 9 :'))
