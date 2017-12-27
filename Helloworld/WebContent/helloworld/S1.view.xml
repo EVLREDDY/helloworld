@@ -1,6 +1,6 @@
 <core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m" controllerName="helloworld.S1" xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page title="Title">
+	<Page title="Hello World">
 		<content>
 			<Table growing="true" growingThreshold="100" class="headFix"
 				growingScrollToLoad="true" id="tableId" inset="true" items="{/}">
