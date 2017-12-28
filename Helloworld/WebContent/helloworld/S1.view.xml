@@ -2,13 +2,20 @@
 	xmlns="sap.m" controllerName="helloworld.S1" xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="Hello World">
 		<content>
+			<Input id="productInput" type="Text" placeholder="Enter anything" suggest="onSuggest"
+				showSuggestion="true" suggestionItems="{/}">
+				<suggestionItems>
+					<core:Item text="{name}" />
+				</suggestionItems>
+			</Input>
+			
 			<Table growing="true" growingThreshold="100" class="headFix"
 				growingScrollToLoad="true" id="tableId" inset="true" items="{/}">
 				<columns>
 					<Column minScreenWidth="Phone" hAlign="Center" demandPopin="true">
 						<ObjectIdentifier title="Name" />
 					</Column>
-				</columns> 
+				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
